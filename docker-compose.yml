@@ -1,0 +1,13 @@
+services:
+  web-security-auditor:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__AuditDb=Data Source=/data/audits.db
+    volumes:
+      - auditor-data:/data
+
+volumes:
+  auditor-data:

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Web Security Auditor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">Authorized defensive scanning</p>
+      <h1>Web Security Auditor</h1>
+      <p>Run lightweight DNS, HTTP header, and controlled port exposure checks with clear hardening recommendations.</p>
+    </section>
+
+    <section class="card">
+      <form id="auditForm">
+        <label>Target domain or IP
+          <input id="target" name="target" placeholder="example.com" required>
+        </label>
+        <div class="grid">
+          <label>Start port
+            <input id="startPort" name="startPort" type="number" min="1" max="65535" value="1">
+          </label>
+          <label>End port
+            <input id="endPort" name="endPort" type="number" min="1" max="65535" value="1000">
+          </label>
+          <label>Timeout ms
+            <input id="timeoutMs" name="timeoutMs" type="number" min="100" max="5000" value="800">
+          </label>
+        </div>
+        <label class="checkbox"><input id="authorized" type="checkbox"> I confirm I own this system or have explicit permission to audit it.</label>
+        <button type="submit" id="runBtn">Run Audit</button>
+      </form>
+    </section>
+
+    <section id="results" class="card hidden">
+      <div class="section-title">
+        <h2>Audit Results</h2>
+        <a id="downloadLink" class="link" href="#">Download JSON</a>
+      </div>
+      <div id="summary" class="summary"></div>
+      <h3>Open Ports</h3>
+      <table><thead><tr><th>Port</th><th>Service</th></tr></thead><tbody id="portsTable"></tbody></table>
+      <h3>Recommendations</h3>
+      <ul id="recommendations"></ul>
+    </section>
+
+    <section class="card">
+      <div class="section-title"><h2>Recent Audits</h2><button id="refreshBtn" class="secondary">Refresh</button></div>
+      <table><thead><tr><th>Target</th><th>Status</th><th>Open Ports</th><th>Created</th></tr></thead><tbody id="historyTable"></tbody></table>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
