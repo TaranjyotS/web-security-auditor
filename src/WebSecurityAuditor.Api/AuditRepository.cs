@@ -8,6 +8,7 @@ public interface IAuditRepository
     Task SaveAsync(AuditReport report, CancellationToken cancellationToken);
     Task<IReadOnlyList<AuditSummary>> ListSummariesAsync(CancellationToken cancellationToken);
     Task<AuditReport?> GetAsync(Guid id, CancellationToken cancellationToken);
+    Task<int> ClearAsync(CancellationToken cancellationToken);
 }
 
 public sealed record AuditSummary(
@@ -62,5 +63,13 @@ public sealed class AuditRepository(IDbContextFactory<AuditDbContext> dbFactory)
         await using var db = await dbFactory.CreateDbContextAsync(cancellationToken).ConfigureAwait(false);
         var entity = await db.Audits.AsNoTracking().FirstOrDefaultAsync(audit => audit.Id == id, cancellationToken).ConfigureAwait(false);
         return entity?.ToReport();
+    }
+
+    public async Task<int> ClearAsync(CancellationToken cancellationToken)
+    {
+        await using var db = await dbFactory.CreateDbContextAsync(cancellationToken).ConfigureAwait(false);
+        var entities = await db.Audits.ToListAsync(cancellationToken).ConfigureAwait(false);
+        db.Audits.RemoveRange(entities);
+        return await db.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
 }

@@ -7,6 +7,7 @@ const recommendations = document.querySelector('#recommendations');
 const historyTable = document.querySelector('#historyTable');
 const downloadLink = document.querySelector('#downloadLink');
 const refreshBtn = document.querySelector('#refreshBtn');
+const clearHistoryBtn = document.querySelector('#clearHistoryBtn');
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -56,6 +57,39 @@ refreshBtn.addEventListener('click', async () => {
     await loadHistory();
   } catch (error) {
     showUiError(error.message);
+  }
+});
+
+clearHistoryBtn.addEventListener('click', async () => {
+  clearUiError();
+
+  const confirmed = window.confirm('Clear all locally stored audit history? This cannot be undone.');
+  if (!confirmed) {
+    return;
+  }
+
+  clearHistoryBtn.disabled = true;
+  clearHistoryBtn.textContent = 'Clearing...';
+
+  try {
+    const response = await fetch('/api/audits', {
+      method: 'DELETE',
+      headers: { 'Accept': 'application/json' }
+    });
+
+    const data = await readResponse(response);
+    if (!response.ok) {
+      throw new Error(data?.error || data?.title || `Clear history failed with HTTP ${response.status}`);
+    }
+
+    results.classList.add('hidden');
+    await loadHistory();
+    showUiMessage(`Cleared ${data?.deletedCount ?? 0} stored audit record(s).`);
+  } catch (error) {
+    showUiError(error.message);
+  } finally {
+    clearHistoryBtn.disabled = false;
+    clearHistoryBtn.textContent = 'Clear History';
   }
 });
 
@@ -112,22 +146,31 @@ async function loadHistory() {
 }
 
 function showUiError(message) {
-  let errorBox = document.querySelector('#uiError');
-  if (!errorBox) {
-    errorBox = document.createElement('div');
-    errorBox.id = 'uiError';
-    errorBox.className = 'error-box';
-    form.insertAdjacentElement('afterend', errorBox);
+  showUiNotice(message, 'error-box');
+}
+
+function showUiMessage(message) {
+  showUiNotice(message, 'success-box');
+}
+
+function showUiNotice(message, className) {
+  let noticeBox = document.querySelector('#uiNotice');
+  if (!noticeBox) {
+    noticeBox = document.createElement('div');
+    noticeBox.id = 'uiNotice';
+    form.insertAdjacentElement('afterend', noticeBox);
   }
-  errorBox.textContent = message;
-  errorBox.classList.remove('hidden');
+
+  noticeBox.className = className;
+  noticeBox.textContent = message;
+  noticeBox.classList.remove('hidden');
 }
 
 function clearUiError() {
-  const errorBox = document.querySelector('#uiError');
-  if (errorBox) {
-    errorBox.textContent = '';
-    errorBox.classList.add('hidden');
+  const noticeBox = document.querySelector('#uiNotice');
+  if (noticeBox) {
+    noticeBox.textContent = '';
+    noticeBox.classList.add('hidden');
   }
 }
 

@@ -18,6 +18,7 @@ This project demonstrates how to build a safe, portfolio-ready security utility 
 - Security recommendation engine
 - SQLite audit history
 - JSON report download
+- Clear History control for deleting locally stored audit records
 - Docker support
 - GitHub Actions CI pipeline
 - Unit tests for validation and recommendations
@@ -207,3 +208,41 @@ dotnet build WebSecurityAuditor.sln
 dotnet test WebSecurityAuditor.sln
 dotnet run --project src/WebSecurityAuditor.Api/WebSecurityAuditor.Api.csproj
 ```
+
+## Troubleshooting: Recent Audits shows HTTP 500
+
+If the audit runs successfully but the UI shows:
+
+```text
+Audit completed, but history refresh failed: History failed with HTTP 500
+```
+
+it means the audit endpoint completed, but the history endpoint failed while reading saved audit rows from SQLite. This version fixes that by using a lightweight `AuditSummary` response for `/api/audits` instead of fully deserializing every stored JSON report.
+
+Run a clean rebuild after pulling the fix:
+
+```bash
+dotnet clean
+dotnet restore WebSecurityAuditor.sln
+dotnet build WebSecurityAuditor.sln
+dotnet test WebSecurityAuditor.sln
+dotnet run --project src/WebSecurityAuditor.Api/WebSecurityAuditor.Api.csproj
+```
+
+If you still see stale history errors from an older local database, stop the app and delete the local SQLite database file:
+
+```bash
+rm audits.db
+```
+
+On Windows PowerShell:
+
+```powershell
+Remove-Item audits.db -ErrorAction SilentlyContinue
+```
+
+Then run the app again. The database is recreated automatically.
+
+## Troubleshooting: Recent audits remain after restart
+
+This is expected because the application uses SQLite persistence. To remove local audit history, click **Clear History** in the dashboard. For manual cleanup during development, stop the app and delete the local `audits.db`, `audits.db-shm`, and `audits.db-wal` files if they exist.

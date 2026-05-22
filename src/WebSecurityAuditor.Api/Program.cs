@@ -55,6 +55,13 @@ app.MapGet("/api/audits", async (IAuditRepository repository, CancellationToken 
     return Results.Ok(summaries);
 });
 
+
+app.MapDelete("/api/audits", async (IAuditRepository repository, CancellationToken cancellationToken) =>
+{
+    var deletedCount = await repository.ClearAsync(cancellationToken).ConfigureAwait(false);
+    return Results.Ok(new { deletedCount });
+});
+
 app.MapGet("/api/audits/{id:guid}", async (Guid id, IAuditRepository repository, CancellationToken cancellationToken) =>
 {
     var report = await repository.GetAsync(id, cancellationToken).ConfigureAwait(false);
