@@ -1,9 +1,29 @@
-bin/
-obj/
+# Build outputs
+[Bb]in/
+[Oo]bj/
 .vs/
+.vscode/
+
+# User/system files
 *.user
+*.suo
+*.swp
+.DS_Store
+Thumbs.db
+
+# Database/runtime files
 *.db
 *.db-shm
 *.db-wal
+reports/
+logs/
+
+# Test/coverage outputs
 TestResults/
 coverage/
+*.trx
+
+# Environment/secrets
+.env
+.env.*
+appsettings.Development.json
