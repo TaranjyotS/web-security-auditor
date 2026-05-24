@@ -26,7 +26,6 @@
   <a href="#-troubleshooting">Troubleshooting</a>
 </p>
 
-
 </div>
 
 ---
@@ -150,6 +149,11 @@ Containerization
 ---
 
 ## 📸 Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/Dashboard.png" width="45%"/>
+  <img src="docs/screenshots/Audit_Results.png" width="45%"/>
+</p>
 
 ---
 
