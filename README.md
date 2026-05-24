@@ -151,8 +151,8 @@ Containerization
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/Dashboard.png" width="45%"/>
-  <img src="docs/screenshots/Audit_Results.png" width="45%"/>
+  <img src="docs/screenshots/dashboard.png" width="45%"/>
+  <img src="docs/screenshots/audit-results.png" width="45%"/>
 </p>
 
 ---
@@ -176,6 +176,32 @@ flowchart TD
 
 </div>
 
+### 🔄 End-to-End Workflow
+
+```text
+User Opens Browser Dashboard
+        ↓
+User Enters Target Domain/IP and Confirms Authorization
+        ↓
+ASP.NET Core API Validates Target, Ports, and Timeout
+        ↓
+Audit Service Starts Controlled Security Checks
+        ↓
+DNS Inspector Resolves Target
+        ↓
+HTTP Inspector Checks Status, Redirects, and Security Headers
+        ↓
+Controlled Port Scanner Checks Approved Port Range
+        ↓
+Recommendation Engine Generates Hardening Guidance
+        ↓
+Audit Repository Saves Result to SQLite
+        ↓
+Dashboard Displays Findings and Risk Summary
+        ↓
+User Downloads JSON Report or Clears Local Audit History
+```
+
 ### System Flow
 
 | Step |                       What Happens                      |
@@ -189,7 +215,8 @@ flowchart TD
 
 ---
 
-## 📁 Folder Structure
+<details>
+<summary><strong>📁 Folder Structure</strong></summary>
 
 ```text
 web-security-auditor/
@@ -205,6 +232,8 @@ web-security-auditor/
 ├── WebSecurityAuditor.sln
 └── README.md
 ```
+
+</details>
 
 ---
 
