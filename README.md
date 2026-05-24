@@ -5,15 +5,15 @@
 ### Production-ready defensive web security auditing platform for authorized DNS, HTTP header, and controlled port exposure checks.
 
 <p>
-  <img src="https://img.shields.io/badge/⚙️_BACKEND-.NET_8-512BD4?style=for-the-badge&labelColor=555555&logo=dotnet&logoColor=white" />
-  <img src="https://img.shields.io/badge/🔌_API-ASP.NET_Core-512BD4?style=for-the-badge&labelColor=555555&logo=dotnet&logoColor=white" />
-  <img src="https://img.shields.io/badge/🗄️_DATABASE-SQLite-003B57?style=for-the-badge&labelColor=555555&logo=sqlite&logoColor=white" />
+  <img src="https://img.shields.io/badge/_BACKEND-.NET_8-512BD4?style=for-the-badge&labelColor=555555&logo=dotnet&logoColor=white" />
+  <img src="https://img.shields.io/badge/_API-ASP.NET_Core-512BD4?style=for-the-badge&labelColor=555555&logo=dotnet&logoColor=white" />
+  <img src="https://img.shields.io/badge/_DATABASE-SQLite-003B57?style=for-the-badge&labelColor=555555&logo=sqlite&logoColor=white" />
 </p>
 
 <p>
-  <img src="https://img.shields.io/badge/🐳_CONTAINERIZED-Docker-2496ED?style=for-the-badge&labelColor=555555&logo=docker&logoColor=white" />
-  <img src="https://img.shields.io/badge/🚀_CI/CD-GitHub_Actions-2088FF?style=for-the-badge&labelColor=555555&logo=githubactions&logoColor=white" />
-  <img src="https://img.shields.io/badge/🧪_TESTING-xUnit-5C2D91?style=for-the-badge&labelColor=555555" />
+  <img src="https://img.shields.io/badge/_CONTAINERIZED-Docker-2496ED?style=for-the-badge&labelColor=555555&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/_CI/CD-GitHub_Actions-2088FF?style=for-the-badge&labelColor=555555&logo=githubactions&logoColor=white" />
+  <img src="https://img.shields.io/badge/_TESTING-xUnit-5C2D91?style=for-the-badge&labelColor=555555" />
 </p>
 
 <p>
