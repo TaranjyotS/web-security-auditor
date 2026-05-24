@@ -1,46 +1,197 @@
-# Web Security Auditor
+<div align="center">
 
-A production-style defensive web security auditing tool built with **.NET 8**, **ASP.NET Core**, **SQLite**, and a clean browser dashboard.
+# 🛡️ Web Security Auditor
 
-> Use this only on systems you own or are explicitly authorized to assess.
+### Production-ready defensive web security auditing platform for authorized DNS, HTTP header, and controlled port exposure checks.
 
-## Aim
+<p>
+  <img src="https://img.shields.io/badge/⚙️_BACKEND-.NET_8-512BD4?style=for-the-badge&labelColor=555555&logo=dotnet&logoColor=white" />
+  <img src="https://img.shields.io/badge/🔌_API-ASP.NET_Core-512BD4?style=for-the-badge&labelColor=555555&logo=dotnet&logoColor=white" />
+  <img src="https://img.shields.io/badge/🗄️_DATABASE-SQLite-003B57?style=for-the-badge&labelColor=555555&logo=sqlite&logoColor=white" />
+</p>
 
-This project demonstrates how to build a safe, portfolio-ready security utility that performs lightweight external exposure checks and turns them into actionable hardening recommendations.
+<p>
+  <img src="https://img.shields.io/badge/🐳_CONTAINERIZED-Docker-2496ED?style=for-the-badge&labelColor=555555&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/🚀_CI/CD-GitHub_Actions-2088FF?style=for-the-badge&labelColor=555555&logo=githubactions&logoColor=white" />
+  <img src="https://img.shields.io/badge/🧪_TESTING-xUnit-5C2D91?style=for-the-badge&labelColor=555555" />
+</p>
 
-## Features
+<p>
+  <a href="#-overview">Overview</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-screenshots">Screenshots</a> •
+  <a href="#-architecture">Architecture</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-api-reference">API</a> •
+  <a href="#-troubleshooting">Troubleshooting</a>
+</p>
 
-- Web dashboard for running audits
-- REST API for audit creation and retrieval
-- DNS resolution checks
-- HTTP/HTTPS status and header inspection
-- Controlled TCP port exposure scan with a 1000-port safety limit
-- Security recommendation engine
+
+</div>
+
+---
+
+## 📌 Overview
+
+**Web Security Auditor** is a defensive security auditing platform that inspects a target’s externally visible web posture through DNS resolution, HTTP/HTTPS inspection, controlled port scanning, and actionable hardening recommendations.
+
+It was rebuilt from a legacy web-server inspection tool into a clean **portfolio-grade .NET 8 application** with API endpoints, SQLite persistence, Docker support, CI/CD, tests, and a browser dashboard.
+
+> ⚠️ Use this tool only on systems you own or are explicitly authorized to assess.
+
+---
+
+## ✨ Features
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+### 🔍 Security Checks
+
+- DNS resolution
+- HTTP/HTTPS status checks
+- Header inspection
+- Controlled TCP port scan
+- Open service summary
+- Security recommendations
+
+</td>
+<td width="33%" valign="top">
+
+### 🧩 Platform
+
+- ASP.NET Core API
+- Browser dashboard
 - SQLite audit history
 - JSON report download
-- Clear History control for deleting locally stored audit records
+- Clear History control
+- Local-first persistence
+
+</td>
+<td width="33%" valign="top">
+
+### 🚀 Engineering
+
+- .NET 8 solution structure
 - Docker support
-- GitHub Actions CI pipeline
-- Unit tests for validation and recommendations
+- GitHub Actions CI
+- xUnit tests
+- Clean service separation
+- Troubleshooting docs
 
-## Tech stack
+</td>
+</tr>
+</table>
 
-- .NET 8
-- ASP.NET Core Minimal APIs
-- Entity Framework Core
-- SQLite
-- HTML/CSS/JavaScript dashboard
-- xUnit
-- Docker
-- GitHub Actions
+---
 
-## Folder structure
+## 🧱 Tech Stack
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center" width="25%">
+<img src="https://skillicons.dev/icons?i=dotnet" width="48"/><br/>
+<b>.NET 8</b><br/>
+Backend
+</td>
+
+<td align="center" width="25%">
+<img src="https://skillicons.dev/icons?i=cs" width="48"/><br/>
+<b>ASP.NET Core</b><br/>
+API
+</td>
+
+<td align="center" width="25%">
+<img src="https://skillicons.dev/icons?i=sqlite" width="48"/><br/>
+<b>SQLite</b><br/>
+Database
+</td>
+
+<td align="center" width="25%">
+<img src="https://skillicons.dev/icons?i=html,css,js" height="48"/><br/>
+<b>HTML/CSS/JS</b><br/>
+Frontend
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<img src="https://img.shields.io/badge/xUnit-Testing-5C2D91?style=for-the-badge"/><br/>
+<b>xUnit</b><br/>
+Testing
+</td>
+
+<td align="center">
+<img src="https://skillicons.dev/icons?i=git" width="48"/><br/>
+<b>Git</b><br/>
+DevOps
+</td>
+
+<td align="center">
+<img src="https://skillicons.dev/icons?i=githubactions" width="48"/><br/>
+<b>GitHub Actions</b><br/>
+CI/CD
+</td>
+
+<td align="center">
+<img src="https://skillicons.dev/icons?i=docker" width="48"/><br/>
+<b>Docker</b><br/>
+Containerization
+</td>
+</tr>
+
+</table>
+
+</div>
+
+---
+
+## 📸 Screenshots
+
+---
+
+## 🏗️ Architecture
+
+<div align="center">
+
+```mermaid
+flowchart TD
+    A[Browser Dashboard] --> B[ASP.NET Core Minimal APIs]
+    B --> C[Audit Service]
+    C --> D[DNS Inspector]
+    C --> E[HTTP Inspector]
+    C --> F[Controlled Port Scanner]
+    C --> G[Recommendation Engine]
+    B --> H[Audit Repository]
+    H --> I[(SQLite Database)]
+    B --> J[JSON Report Download]
+```
+
+</div>
+
+### System Flow
+
+| Step |                       What Happens                      |
+|------|---------------------------------------------------------|
+|  1   | User enters a domain/IP and confirms authorization      |
+|  2   | API validates target, port range, and timeout           |
+|  3   | DNS, HTTP, and controlled TCP checks run asynchronously |
+|  4   | Recommendation engine generates hardening guidance      |
+|  5   | Report is saved to SQLite and displayed in dashboard    |
+|  6   | User can download JSON or clear local audit history     |
+
+---
+
+## 📁 Folder Structure
 
 ```text
 web-security-auditor/
 ├── src/
-│   ├── WebSecurityAuditor.Api/       # API + dashboard + SQLite persistence
-│   └── WebSecurityAuditor.Core/      # audit domain logic
+│   ├── WebSecurityAuditor.Api/       # API, dashboard, persistence
+│   └── WebSecurityAuditor.Core/      # domain and auditing logic
 ├── tests/
 │   └── WebSecurityAuditor.Tests/     # unit tests
 ├── docs/
@@ -51,7 +202,19 @@ web-security-auditor/
 └── README.md
 ```
 
-## Run locally
+---
+
+## ⚡ Quick Start
+
+### Prerequisites
+
+| Requirement |       Version      |
+|-------------|--------------------|
+|  .NET SDK   |        8.0+        |
+|   Docker    |      Optional      |
+|     Git     | Any recent version |
+
+### Run Locally
 
 ```bash
 dotnet restore WebSecurityAuditor.sln
@@ -65,9 +228,13 @@ Open:
 http://localhost:5000
 ```
 
-If your machine uses a different port, check the terminal output from `dotnet run`.
+### Run Tests
 
-## Run with Docker
+```bash
+dotnet test WebSecurityAuditor.sln
+```
+
+### Run with Docker
 
 ```bash
 docker compose up --build
@@ -79,9 +246,11 @@ Open:
 http://localhost:8080
 ```
 
-## API examples
+---
 
-Create an audit:
+## 🔌 API Reference
+
+### Create Audit
 
 ```bash
 curl -X POST http://localhost:5000/api/audits \
@@ -89,27 +258,83 @@ curl -X POST http://localhost:5000/api/audits \
   -d '{"target":"example.com","startPort":80,"endPort":443,"timeoutMs":800,"authorized":true}'
 ```
 
-List audits:
+### List Audits
 
 ```bash
 curl http://localhost:5000/api/audits
 ```
 
-Read audit by ID:
+### Read Audit by ID
 
 ```bash
 curl http://localhost:5000/api/audits/{id}
 ```
 
-Download JSON report:
+### Download JSON Report
 
 ```bash
 curl -OJ http://localhost:5000/api/reports/{id}/download
 ```
 
-## Troubleshooting
+### Clear Audit History
 
-### `IHttpClientFactory could not be found`
+```bash
+curl -X DELETE http://localhost:5000/api/audits
+```
+
+---
+
+## 🛡️ Defensive Guardrails
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### ✅ Included
+
+- Authorization acknowledgement
+- 1000-port safety limit
+- Controlled timeout handling
+- Local audit persistence
+- Clear History option
+- Defensive recommendations
+
+</td>
+<td width="50%" valign="top">
+
+### ❌ Not Included
+
+- Exploit execution
+- Credential attacks
+- Payload injection
+- Authentication bypass
+- Privilege escalation
+- Intrusive enumeration
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🧪 What This Project Demonstrates
+
+|       Skill Area       |                 Demonstrated Through               |
+|------------------------|----------------------------------------------------|
+| Backend Engineering    | ASP.NET Core APIs, clean services, validation      |
+| Security Engineering   | Defensive scanning, guardrails, recommendations    |
+| Data Persistence       | SQLite + EF Core audit history                     |
+| Full-Stack Integration | Dashboard connected to REST APIs                   |
+| DevOps                 | Docker and GitHub Actions                          |
+| Testing                | xUnit validation and recommendation tests          |
+| Production Thinking    | Troubleshooting docs, safety limits, clear history |
+
+---
+
+## 🧰 Troubleshooting
+
+<details>
+<summary><strong>IHttpClientFactory could not be found</strong></summary>
 
 Make sure `src/WebSecurityAuditor.Core/WebSecurityAuditor.Core.csproj` includes:
 
@@ -125,15 +350,18 @@ dotnet restore WebSecurityAuditor.sln
 dotnet build WebSecurityAuditor.sln
 ```
 
-### `CS0168: The variable 'ex' is declared but never used`
+</details>
 
-This project treats warnings as errors using:
+<details>
+<summary><strong>CS0168: The variable 'ex' is declared but never used</strong></summary>
+
+This project treats warnings as errors:
 
 ```xml
 <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 ```
 
-So unused exception variables break the build. Use this pattern when the exception object is not needed:
+Use this pattern if the exception object is not needed:
 
 ```csharp
 catch (HttpRequestException) when (scheme == "https")
@@ -142,24 +370,18 @@ catch (HttpRequestException) when (scheme == "https")
 }
 ```
 
-Use this pattern only when the exception message is actually returned or logged:
+</details>
 
-```csharp
-catch (Exception ex) when (ex is HttpRequestException or InvalidOperationException)
-{
-    return new HttpResult(url, null, scheme == "https", null, [], ex.Message);
-}
-```
+<details>
+<summary><strong>FactAttribute could not be found</strong></summary>
 
-### `FactAttribute could not be found` or `Fact could not be found`
-
-This means the test files are missing the xUnit namespace import. Each test file should start with:
+Each test file should include:
 
 ```csharp
 using Xunit;
 ```
 
-The tests project should also include these packages:
+The test project should include:
 
 ```xml
 <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
@@ -167,7 +389,7 @@ The tests project should also include these packages:
 <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
 ```
 
-After fixing it, run:
+Then run:
 
 ```bash
 dotnet clean
@@ -176,50 +398,62 @@ dotnet build WebSecurityAuditor.sln
 dotnet test WebSecurityAuditor.sln
 ```
 
-### `dotnet run` looks stuck after `Now listening on http://localhost:5000`
+</details>
 
-That is expected. The API server is running and waiting for browser/API requests. Do not expect the terminal to return immediately. Open this in your browser:
+<details>
+<summary><strong>dotnet run appears stuck after Now listening on localhost</strong></summary>
+
+That is expected. The API server is running and waiting for browser/API requests.
+
+Open:
 
 ```text
 http://localhost:5000
 ```
 
-To stop the server, press:
+To stop the server:
 
 ```text
 Ctrl + C
 ```
 
-### Port range safety error
+</details>
 
-The app intentionally limits scans to 1000 ports. Use a smaller range, for example:
+<details>
+<summary><strong>Port range safety error</strong></summary>
 
-```bash
-# Dashboard: set Start Port = 80 and End Port = 443
-# API: send startPort=80 and endPort=443
-```
+The scanner intentionally limits scans to 1000 ports.
 
-### Recommended clean rebuild
-
-```bash
-dotnet clean
-dotnet restore WebSecurityAuditor.sln
-dotnet build WebSecurityAuditor.sln
-dotnet test WebSecurityAuditor.sln
-dotnet run --project src/WebSecurityAuditor.Api/WebSecurityAuditor.Api.csproj
-```
-
-## Troubleshooting: Recent Audits shows HTTP 500
-
-If the audit runs successfully but the UI shows:
+Use a smaller range, for example:
 
 ```text
-Audit completed, but history refresh failed: History failed with HTTP 500
+Start Port = 80
+End Port = 443
 ```
 
-it means the audit endpoint completed, but the history endpoint failed while reading saved audit rows from SQLite. This version fixes that by using a lightweight `AuditSummary` response for `/api/audits` instead of fully deserializing every stored JSON report.
+</details>
 
-Run a clean rebuild after pulling the fix:
+<details>
+<summary><strong>Recent audits remain after restart</strong></summary>
+
+This is expected because the app uses SQLite persistence.
+
+To remove audit history:
+
+- Click **Clear History** in the dashboard
+- Or manually delete local database files:
+
+```text
+audits.db
+audits.db-shm
+audits.db-wal
+```
+
+</details>
+
+---
+
+## 🔄 Recommended Clean Rebuild
 
 ```bash
 dotnet clean
@@ -229,20 +463,31 @@ dotnet test WebSecurityAuditor.sln
 dotnet run --project src/WebSecurityAuditor.Api/WebSecurityAuditor.Api.csproj
 ```
 
-If you still see stale history errors from an older local database, stop the app and delete the local SQLite database file:
+---
 
-```bash
-rm audits.db
-```
+## 🗺️ Roadmap
 
-On Windows PowerShell:
+| Priority |                  Improvement                   |
+|----------|------------------------------------------------|
+|   High   | Authentication and user-specific audit history |
+|   High   | TLS certificate expiry checks                  |
+|  Medium  | OWASP security header scoring                  |
+|  Medium  | API key authentication and rate limiting       |
+|  Medium  | Background audits with progress updates        |
+|   Low    | Kubernetes deployment manifests                |
+|   Low    | Cloud deployment templates                     |
+|   Low    | Observability dashboards                       |
 
-```powershell
-Remove-Item audits.db -ErrorAction SilentlyContinue
-```
+---
 
-Then run the app again. The database is recreated automatically.
+## 📄 License
 
-## Troubleshooting: Recent audits remain after restart
+MIT License
 
-This is expected because the application uses SQLite persistence. To remove local audit history, click **Clear History** in the dashboard. For manual cleanup during development, stop the app and delete the local `audits.db`, `audits.db-shm`, and `audits.db-wal` files if they exist.
+---
+
+## ⚠️ Disclaimer
+
+This project is intended strictly for defensive and educational purposes.
+
+Only use this tool on systems you own or are explicitly authorized to assess.
