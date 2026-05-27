@@ -515,7 +515,7 @@ dotnet run --project src/WebSecurityAuditor.Api/WebSecurityAuditor.Api.csproj
 
 ## 📄 License
 
-MIT License
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
